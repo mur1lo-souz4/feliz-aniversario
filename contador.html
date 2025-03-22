@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Meu Amor</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #0d47a1, #1976d2);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .estrela {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #bbdefb;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #bbdefb;
+            margin-bottom: 10px;
+        }
+        .contador {
+            font-size: 26px;
+            font-weight: bold;
+            color: #e3f2fd;
+            margin: 20px 0;
+        }
+        .carrossel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 320px;
+            height: 240px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .carrossel img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .botao {
+            background-color: #bbdefb;
+            color: #0d47a1;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .citação {
+            font-style: italic;
+            font-size: 20px;
+            color: #e3f2fd;
+            margin-top: 30px;
+            padding: 0 15px;
+        }
+        .coração {
+            font-size: 24px;
+            color: red;
+            animation: pulsar 1.5s infinite;
+        }
+        @keyframes pulsar {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function criarEstrelas(qtd) {
+            for (let i = 0; i < qtd; i++) {
+                let estrela = document.createElement("div");
+                estrela.className = "estrela";
+                estrela.style.top = Math.random() * window.innerHeight + "px";
+                estrela.style.left = Math.random() * window.innerWidth + "px";
+                document.body.appendChild(estrela);
+            }
+        }
+        criarEstrelas(50);
+    </script>
+    
+    <h1>Feliz Aniversário, Meu Amor! ❤️</h1>
+    <div class="contador" id="contador"></div>
+    <div class="carrossel">
+        <button class="botao" onclick="imagemAnterior()">⭠</button>
+        <img id="imagem" src="imagem1.jpg" alt="Nossas fotos">
+        <button class="botao" onclick="proximaImagem()">⭢</button>
+    </div>
+    <p class="citação">“Diante da vastidão do tempo e da imensidão do universo, é um imenso prazer para mim dividir um planeta e uma época com você.” - Carl Sagan</p>
+    <p class="coração">❤️</p>
+    
+    <script>
+        function atualizarContador() {
+            const dataInicio = new Date("2022-06-15T00:00:00");
+            const agora = new Date();
+            const diferenca = agora - dataInicio;
+            
+            const anos = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365));
+            const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+            
+            document.getElementById("contador").innerText = `${anos} anos, ${dias} dias, ${horas}h ${minutos}m ${segundos}s juntos!`;
+        }
+        
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+        
+        const imagens = ["foto1.jpeg", "foto2.jpeg", "foto3.jpeg", "foto4.jpeg"];
+        let index = 0;
+        
+        function proximaImagem() {
+            index = (index + 1) % imagens.length;
+            document.getElementById("imagem").src = imagens[index];
+        }
+        
+        function imagemAnterior() {
+            index = (index - 1 + imagens.length) % imagens.length;
+            document.getElementById("imagem").src = imagens[index];
+        }
+    </script>
+</body>
+</html>
